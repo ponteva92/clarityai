@@ -71,7 +71,6 @@ export function About() {
         <div className="mb-32">
           <div className="flex justify-center mb-16">
             <SectionHeading
-              eyebrow="Kuka minä olen"
               title={<>Kuka <span className="text-gradient">Minä Olen</span></>}
               subtitle="Yhdistän syvän teknisen osaamisen liiketoiminnan ymmärrykseen."
             />

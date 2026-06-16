@@ -15,7 +15,6 @@ import { StickyScroll, type StickyItem } from '../components/ui/StickyScroll';
 import { GlowGrid, GlowCard } from '../components/ui/GlowCard';
 import { ScrollRevealText } from '../components/ui/ScrollRevealText';
 import { Parallax } from '../components/ui/Parallax';
-import { KineticText } from '../components/ui/KineticText';
 import { TiltCard } from '../components/ui/TiltCard';
 import { HeroLogo } from '../components/ui/HeroLogo';
 import { usePageMeta } from '../hooks/usePageMeta';
@@ -259,10 +258,9 @@ export function Home() {
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="text-lg md:text-xl text-brand-gray max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed"
               >
-                Rakennan pk-yrityksille tekoälyautomaatiot, älykkäät chatbotit ja konvertoivat
-                verkkosivut, jotka säästävät kymmeniä tunteja viikossa — ja muuttavat hukatun ajan
-                myynniksi. Ei konsulttijargonia. Vain toimivia koneistoja, jotka tuottavat
-                <span className="text-white font-medium"> mitattavaa tulosta.</span>
+                Tekoälyautomaatiot, chatbotit ja konvertoivat verkkosivut pk-yrityksille.
+                Säästät kymmeniä tunteja viikossa ja muutat hukatun ajan
+                <span className="text-white font-medium"> myynniksi.</span>
               </motion.p>
 
               <motion.div
@@ -330,16 +328,6 @@ export function Home() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-xs text-brand-gray uppercase tracking-widest">Scroll</span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-brand-gray/50 to-transparent" />
-        </motion.div>
       </section>
 
       {/* Trust / capability marquee */}
@@ -392,20 +380,13 @@ export function Home() {
         </div>
       </section>
 
-      {/* Kinetic oversized statement band — signature kinetic typography */}
-      <section className="relative z-10 py-10 md:py-14 overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-cyan/30 to-transparent" />
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-purple/30 to-transparent" />
-        <KineticText text="AUTOMAATIO · TEKOÄLY · TULOSTA · " />
-      </section>
-
       {/* Sticky-scroll process */}
       <section className="relative z-10">
         <div className="container mx-auto px-6 md:px-12 pt-12 pb-0">
           <SectionHeading
             eyebrow="Näin se toimii"
-            title={<>Strategiasta tuotantoon — <span className="text-gradient">selkeästi</span></>}
-            subtitle="Läpinäkyvä, ketterä prosessi joka tuottaa tuloksia nopeasti ja riskittömästi. Vieritä alas."
+            title={<>Strategiasta tuotantoon, <span className="text-gradient">selkeästi</span></>}
+            subtitle="Läpinäkyvä, ketterä prosessi joka tuottaa tuloksia nopeasti ja riskittömästi."
           />
         </div>
         <StickyScroll items={processSteps} />
@@ -416,7 +397,6 @@ export function Home() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-16">
             <SectionHeading
-              eyebrow="Live-demo"
               title={<>Koe Tekoälyn Voima <span className="text-gradient">Juuri Nyt</span></>}
               subtitle="Testaa interaktiivisia demojamme ja näe, miten tekoäly voi ratkaista yrityksesi haasteita reaaliajassa."
             />
@@ -630,7 +610,6 @@ export function Home() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-20">
             <SectionHeading
-              eyebrow="Miksi minä"
               title={<>Miksi Valita <span className="text-gradient">Minut</span>?</>}
               subtitle="Yhdistän syvän teknisen osaamisen liiketoiminnan ymmärrykseen. Tuloksena on ratkaisuja, jotka tuottavat mitattavaa arvoa."
             />
@@ -677,7 +656,6 @@ export function Home() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-16">
             <SectionHeading
-              eyebrow="Kenelle"
               title={<>Tehty <span className="text-gradient">tekijöiden</span> arkeen</>}
               subtitle="Erikoisalani on rakennus-, LVI-, sähkö- ja talotekniikka-alan pk-yritykset, jotka hukkaavat tunteja paperisotaan. Mutta jokainen suomalainen pk-yritys, joka haluaa kasvaa tekoälyllä, on tervetullut."
             />
@@ -709,7 +687,6 @@ export function Home() {
         <div className="container mx-auto px-6 md:px-12 max-w-3xl">
           <div className="mb-14 flex justify-center">
             <SectionHeading
-              eyebrow="Usein kysyttyä"
               title={<>Kysymyksiä? <span className="text-gradient">Vastauksia.</span></>}
             />
           </div>

@@ -165,7 +165,6 @@ export function Services() {
         <div className="max-w-5xl mx-auto">
           <div className="flex justify-center mb-16">
             <SectionHeading
-              eyebrow="Toimintamalli"
               title={<>Neljä vaihetta strategiasta <span className="text-gradient">tuotantoon</span></>}
               subtitle="Läpinäkyvä ja ketterä prosessi, joka tuottaa tulokset nopeasti ja riskittömästi — näet arvon jo prototyyppivaiheessa, et vasta lopussa."
             />

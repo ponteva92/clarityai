@@ -383,17 +383,15 @@ export function Pilot() {
             </a>
           </motion.div>
 
-          {/* Trust micro-row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-brand-gray/80"
-          >
-            <span className="inline-flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-brand-cyan" /> Ei pitkää sitoutumista</span>
-            <span className="inline-flex items-center gap-2"><Zap className="w-4 h-4 text-brand-cyan" /> Toimitus 1–3 päivässä</span>
-            <span className="inline-flex items-center gap-2"><Sparkles className="w-4 h-4 text-brand-cyan" /> AI-chatbot mukana</span>
-          </motion.div>
+        </div>
+      </section>
+
+      {/* Trust band — directly below the hero, not inside it */}
+      <section className="relative z-10 px-6 md:px-12 pt-2 pb-10">
+        <div className="container mx-auto max-w-5xl flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-brand-gray/80">
+          <span className="inline-flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-brand-cyan" /> Ei pitkää sitoutumista</span>
+          <span className="inline-flex items-center gap-2"><Zap className="w-4 h-4 text-brand-cyan" /> Toimitus 1–3 päivässä</span>
+          <span className="inline-flex items-center gap-2"><Sparkles className="w-4 h-4 text-brand-cyan" /> AI-chatbot mukana</span>
         </div>
       </section>
 
@@ -436,7 +434,6 @@ export function Pilot() {
         <div className="container mx-auto max-w-5xl">
           <div className="flex justify-center mb-16">
             <SectionHeading
-              eyebrow="Ennen / jälkeen"
               title={<>Muutos, jonka <span className="text-gradient">huomaat heti</span></>}
               subtitle="Vedä liukusäädintä ja näe, mitä päivitetty, tekoälyä hyödyntävä sivusto tekee arjellesi."
             />
@@ -453,7 +450,6 @@ export function Pilot() {
         <div className="container mx-auto max-w-3xl">
           <div className="flex justify-center mb-12">
             <SectionHeading
-              eyebrow="Usein kysyttyä"
               title={<>Kysymyksiä? <span className="text-gradient">Vastauksia.</span></>}
             />
           </div>
