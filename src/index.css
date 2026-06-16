@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-brand-bg: #0a0b0d;
+  --color-brand-indigo: #1a1b3e;
+  --color-brand-cyan: #00f5ff;
+  --color-brand-purple: #a855f7;
+  --color-brand-amber: #f59e0b;
+  --color-brand-white: #fafafa;
+  --color-brand-gray: #a1a1aa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  
+  a, button, [role="button"], input, select, textarea {
+    cursor: none !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-brand-cyan), var(--color-brand-purple));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5ffbff, #c084fc);
+}
+
+/* Hide scrollbar (used in horizontal scroll rails) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::selection {
+  background: rgba(0, 245, 255, 0.25);
+  color: #fff;
+}
+
+/* Visible keyboard focus (essential since the custom cursor hides the pointer) */
+:focus-visible {
+  outline: 2px solid var(--color-brand-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-purple));
+}
+
+.text-gradient-gold {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, var(--color-brand-amber), #fcd34d);
+}
+
+/* ===== Premium animated gradient text (shimmer) ===== */
+.text-gradient-animated {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    110deg,
+    var(--color-brand-cyan) 0%,
+    var(--color-brand-purple) 25%,
+    #fff 50%,
+    var(--color-brand-cyan) 75%,
+    var(--color-brand-purple) 100%
+  );
+  background-size: 220% auto;
+  animation: text-shimmer 6s linear infinite;
+}
+
+@keyframes text-shimmer {
+  to {
+    background-position: 220% center;
+  }
+}
+
+/* ===== Film grain overlay ===== */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== Aurora / animated mesh blobs ===== */
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -4%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+.animate-aurora {
+  animation: aurora-drift 18s ease-in-out infinite;
+}
+
+/* ===== Floating ===== */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+/* ===== Marquee ===== */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee-x var(--marquee-duration, 35s) linear infinite;
+}
+
+/* ===== Kinetic oversized type band (two identical groups → seamless -50%) ===== */
+@keyframes kinetic-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-kinetic {
+  animation: kinetic-marquee var(--kinetic-duration, 34s) linear infinite;
+}
+.animate-kinetic-reverse {
+  animation: kinetic-marquee var(--kinetic-duration, 34s) linear infinite reverse;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* ===== Conic glow border (premium card frame) ===== */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+@keyframes spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+/* Emblem ring rotations (origin set on each SVG group via transform-box: view-box) */
+.animate-ring-slow {
+  animation: spin-slow 34s linear infinite;
+}
+.animate-ring-rev {
+  animation: spin-reverse 24s linear infinite;
+}
+.animate-ring-fast {
+  animation: spin-slow 16s linear infinite;
+}
+@keyframes core-pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.14);
+  }
+}
+.animate-core-pulse {
+  animation: core-pulse 3.2s ease-in-out infinite;
+  transform-box: view-box;
+  transform-origin: 120px 120px;
+}
+@keyframes node-flicker {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes halo-breathe {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+.animate-halo-breathe {
+  animation: halo-breathe 6s ease-in-out infinite;
+}
+
+/* ===== Shine sweep on hover ===== */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.8s ease;
+}
+.shine:hover::after {
+  transform: translateX(120%);
+}
+
+/* ===== Subtle dotted/grid backdrop ===== */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* ===== Premium depth shadow ===== */
+.shadow-premium {
+  box-shadow:
+    0 24px 80px -24px rgba(0, 0, 0, 0.75),
+    0 8px 24px -12px rgba(0, 245, 255, 0.12);
+}
+
+/* ===== Gradient border that reveals on hover ===== */
+.border-gradient-hover {
+  position: relative;
+}
+.border-gradient-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-brand-cyan), var(--color-brand-purple) 55%, var(--color-brand-amber));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.border-gradient-hover:hover::before {
+  opacity: 1;
+}
+
+/* ===== Glossy top highlight (premium glass sheen) ===== */
+.gloss {
+  position: relative;
+}
+.gloss::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 45%);
+  pointer-events: none;
+}
+
+/* ===== Animated underline for premium links ===== */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  background: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-purple));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Refined display typography */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* ===== Multi-layer colored drop shadow (elements pop off the page) ===== */
+.shadow-pop {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    -14px 20px 60px -28px rgba(0, 245, 255, 0.35),
+    14px 26px 70px -30px rgba(168, 85, 247, 0.38),
+    0 40px 80px -40px rgba(0, 0, 0, 0.8);
+}
+
+/* ===== Mouse-tracking glow card (unified light source across a grid) ===== */
+.glow-card__border,
+.glow-card__surface {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--glow, 0);
+  transition: opacity 0.5s ease;
+}
+.glow-card__border {
+  padding: 1px;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    var(--color-brand-cyan),
+    rgba(168, 85, 247, 0.5) 40%,
+    transparent 72%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.glow-card__surface {
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 245, 255, 0.1),
+    transparent 60%
+  );
+}
+
+/* ===== Deep ambient mesh-gradient layer ===== */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 50% at 12% 8%, rgba(0, 245, 255, 0.10), transparent 60%),
+    radial-gradient(38% 45% at 88% 22%, rgba(168, 85, 247, 0.10), transparent 60%),
+    radial-gradient(45% 50% at 70% 88%, rgba(245, 158, 11, 0.06), transparent 60%),
+    radial-gradient(50% 60% at 30% 75%, rgba(0, 245, 255, 0.05), transparent 60%);
+  filter: saturate(1.1);
+}
+
+/* Oversized razor-sharp display heading */
+.text-mega {
+  font-size: clamp(3rem, 11vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+/* ===== Outlined (stroke) display type — architectural kinetic texture ===== */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.25px rgba(255, 255, 255, 0.16);
+}
+.text-stroke-cyan {
+  color: transparent;
+  -webkit-text-stroke: 1.25px rgba(0, 245, 255, 0.5);
+}
+
+/* ===== Cinematic vignette — frames the viewport for an expensive, focused feel ===== */
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: radial-gradient(120% 120% at 50% 42%, transparent 55%, rgba(0, 0, 0, 0.42) 100%);
+}
+
+/* ===== Line-mask reveal — text rises from behind an invisible mask (cinematic) ===== */
+.mask-reveal {
+  overflow: hidden;
+  display: block;
+}
+
+/* ===== 3D tilt helpers ===== */
+.tilt-3d {
+  transform-style: preserve-3d;
+}
+.tilt-layer {
+  transform: translateZ(40px);
+}
