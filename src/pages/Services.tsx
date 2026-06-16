@@ -97,7 +97,7 @@ export function Services() {
           <SectionHeading
             as="h1"
             eyebrow="Palvelut"
-            title={<>Tekoälyratkaisut, Jotka <span className="text-gradient">Muuttavat Pelin</span></>}
+            title={<>Tekoälyratkaisut, jotka <span className="text-gradient">muuttavat pelin</span></>}
             subtitle="Strategiasta tuotantoon — yhdeltä luukulta. Rakennan AI-automaatiot, chatbotit ja sovellukset, jotka säästävät aikaa, kasvattavat myyntiä ja maksavat itsensä takaisin. Jokainen ratkaisu räätälöidään yrityksesi todellisiin haasteisiin."
           />
         </div>
@@ -206,7 +206,7 @@ export function Services() {
           <div className="text-center glass-card p-12 rounded-[3rem] border border-brand-cyan/20 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/10 to-brand-purple/10" />
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Mikä Näistä Ratkaisisi Sinun Pullonkaulasi?</h2>
+              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Mikä näistä ratkaisisi sinun pullonkaulasi?</h2>
               <p className="text-xl text-brand-gray mb-10 max-w-2xl mx-auto">
                 Et ole varma mistä aloittaa? Varaa ilmainen 30 minuutin kartoitus. Käymme läpi prosessisi ja tunnistan suurimman arvon tuottavan ensiaskeleen — ilman sitoutumista.
               </p>

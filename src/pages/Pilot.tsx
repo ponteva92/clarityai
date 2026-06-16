@@ -535,7 +535,7 @@ export function Pilot() {
                   <div className="w-20 h-20 bg-brand-cyan/15 border border-brand-cyan/30 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle2 className="w-10 h-10 text-brand-cyan" />
                   </div>
-                  <h3 className="text-2xl font-display font-bold mb-4 text-white">Kiitos hakemuksesta!</h3>
+                  <h3 className="text-2xl font-display font-bold mb-4 text-white">Kiitos hakemuksesta.</h3>
                   <p className="text-brand-gray">Olen sinuun yhteydessä 24 tunnin kuluessa.</p>
                 </motion.div>
               ) : (

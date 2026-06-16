@@ -31,7 +31,7 @@ export function About() {
           <SectionHeading
             as="h1"
             eyebrow="Tietoa minusta"
-            title={<>Ihminen <span className="text-gradient">Tekoälyn Takana</span></>}
+            title={<>Ihminen <span className="text-gradient">tekoälyn takana</span></>}
             subtitle="ClarityAI syntyi halusta tehdä monimutkaisesta teknologiasta ymmärrettävää ja tuottavaa. En piiloudu jargonin taakse — rakennan toimivia koneistoja, ja paras tekoäly on sellainen, jota et edes huomaa käyttäväsi."
           />
         </div>
@@ -71,7 +71,7 @@ export function About() {
         <div className="mb-32">
           <div className="flex justify-center mb-16">
             <SectionHeading
-              title={<>Kuka <span className="text-gradient">Minä Olen</span></>}
+              title={<>Kuka <span className="text-gradient">minä olen</span></>}
               subtitle="Yhdistän syvän teknisen osaamisen liiketoiminnan ymmärrykseen."
             />
           </div>
@@ -83,7 +83,7 @@ export function About() {
                   <div className="relative overflow-hidden rounded-3xl aspect-[4/5]">
                     <motion.img
                       src="/oma-kuva.jpg"
-                      alt="Profiilikuva"
+                      alt="Heikki Niemimäki, ClarityAI:n perustaja ja tekoälyarkkitehti"
                       style={{ y: imageY, scale: 1.15 }}
                       className="object-cover w-full h-full"
                       referrerPolicy="no-referrer"

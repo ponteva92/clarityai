@@ -238,7 +238,7 @@ export function Home() {
               </motion.div>
 
               <h1 className="text-5xl md:text-7xl lg:text-[3.7rem] xl:text-[4.6rem] font-display font-bold tracking-[-0.045em] leading-[0.98] mb-8">
-                {['Tekoäly, Joka', 'Mullistaa', 'Liiketoimintasi'].map((line, i) => (
+                {['Tekoäly, joka', 'mullistaa', 'liiketoimintasi'].map((line, i) => (
                   <span key={line} className="mask-reveal">
                     <motion.span
                       className="block pb-[0.12em]"
@@ -397,7 +397,7 @@ export function Home() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-16">
             <SectionHeading
-              title={<>Koe Tekoälyn Voima <span className="text-gradient">Juuri Nyt</span></>}
+              title={<>Koe tekoälyn voima <span className="text-gradient">juuri nyt</span></>}
               subtitle="Testaa interaktiivisia demojamme ja näe, miten tekoäly voi ratkaista yrityksesi haasteita reaaliajassa."
             />
           </div>
@@ -610,7 +610,7 @@ export function Home() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-20">
             <SectionHeading
-              title={<>Miksi Valita <span className="text-gradient">Minut</span>?</>}
+              title={<>Miksi valita <span className="text-gradient">minut</span>?</>}
               subtitle="Yhdistän syvän teknisen osaamisen liiketoiminnan ymmärrykseen. Tuloksena on ratkaisuja, jotka tuottavat mitattavaa arvoa."
             />
           </div>
@@ -720,7 +720,7 @@ export function Home() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-cyan/20 blur-[120px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">Lakkaa Polttamasta Aikaa. <span className="text-gradient">Aloita Tänään.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">Lakkaa polttamasta aikaa. <span className="text-gradient">Aloita tänään.</span></h2>
               <p className="text-xl text-brand-gray mb-12">Varaa ilmainen 30 minuutin kartoitus. Käymme läpi yrityksesi suurimmat aikasyöpöt ja näytän konkreettisesti, mitä tekoäly voisi automatisoida — ilman sitoutumista, ilman riskiä.</p>
 
               <MagneticButton

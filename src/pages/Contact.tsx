@@ -86,7 +86,7 @@ export function Contact() {
           <SectionHeading
             as="h1"
             eyebrow="Yhteystiedot"
-            title={<>Aloitetaan <span className="text-gradient">Yhteistyö</span></>}
+            title={<>Aloitetaan <span className="text-gradient">yhteistyö</span></>}
             subtitle="Olitpa vasta tutkimassa tekoälyn mahdollisuuksia tai valmis automatisoimaan ensimmäisen prosessisi — vastaan jokaiseen viestiin 24 tunnin sisällä. Ilmainen kartoitus, ei myyntipuhetta."
           />
         </div>
@@ -95,7 +95,7 @@ export function Contact() {
           {/* Contact Info */}
           <Reveal direction="left" className="lg:col-span-5 space-y-12">
             <div>
-              <h2 className="text-3xl font-display font-bold mb-8 text-white">Ota Yhteyttä</h2>
+              <h2 className="text-3xl font-display font-bold mb-8 text-white">Ota yhteyttä</h2>
               <p className="text-brand-gray leading-relaxed mb-10">
                 Soita, laita sähköpostia tai täytä lomake — kumpi tahansa käy. Vastaan kaikkiin
                 tiedusteluihin 24 tunnin kuluessa, tai varaa suoraan ilmainen 30 minuutin kartoitus
@@ -183,7 +183,7 @@ export function Contact() {
             <div id="laheta-viesti" className="glass-card p-8 md:p-12 rounded-[2.5rem] border border-white/10 relative overflow-hidden scroll-mt-32">
               <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-brand-cyan via-brand-purple to-brand-amber opacity-50" />
               
-              <h2 className="text-3xl font-display font-bold mb-8 text-white">Lähetä Viesti</h2>
+              <h2 className="text-3xl font-display font-bold mb-8 text-white">Lähetä viesti</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -277,9 +277,9 @@ export function Contact() {
                   {isSubmitting ? (
                     <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : isSuccess ? (
-                    <>Viesti Lähetetty <CheckCircle2 className="w-5 h-5" /></>
+                    <>Viesti lähetetty <CheckCircle2 className="w-5 h-5" /></>
                   ) : (
-                    <>Lähetä Viesti <Send className="w-5 h-5" /></>
+                    <>Lähetä viesti <Send className="w-5 h-5" /></>
                   )}
                 </button>
                 
