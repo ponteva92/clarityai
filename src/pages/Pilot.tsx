@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Clock, Server, PenTool, ArrowRight, MessageSquare, ChevronDown, Search, ArrowLeft, GripVertical, ShieldCheck, Sparkles, Zap } from 'lucide-react';
+import { CheckCircle2, Clock, Server, PenTool, ArrowRight, MessageSquare, ChevronDown, Search, ArrowLeft, GripVertical, ShieldCheck, Zap } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -179,8 +179,8 @@ const BeforeAfterSlider = () => {
 // --- Main Page Component ---
 export function Pilot() {
   usePageMeta({
-    title: 'Pilottiohjelma — moderni AI-verkkosivu 499 €',
-    description: 'Rajattu pilotti: 5 paikkaa moderneille AI-verkkosivuille rakennusalan pk-yrityksille. Kiinteä 499 €, toteutus 1–3 päivässä, AI-chatbot mukana, ei pitkää sitoutumista.',
+    title: 'Pilottiohjelma — moderni AI-verkkosivu rakennusalalle',
+    description: 'Rajattu pilotti: 5 paikkaa moderneille AI-verkkosivuille rakennusalan pk-yrityksille. Toteutus 1–3 päivässä, ei pitkää sitoutumista. Kysy hintaa.',
   });
 
   const { scrollYProgress } = useScroll();
@@ -305,8 +305,8 @@ export function Pilot() {
         >
           <Parallax offset={60}>
             <div className="glass-card shadow-pop rounded-2xl px-5 py-4 animate-float-slow text-center">
-              <div className="text-3xl font-display font-bold text-gradient">499 €</div>
-              <div className="text-xs text-brand-gray mt-1">kiinteä hinta · ei yllätyksiä</div>
+              <div className="text-3xl font-display font-bold text-gradient">Kysy hintaa</div>
+              <div className="text-xs text-brand-gray mt-1">läpinäkyvä hinta, ei yllätyksiä</div>
             </div>
           </Parallax>
         </motion.div>
@@ -352,8 +352,8 @@ export function Pilot() {
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             className="text-lg md:text-2xl text-brand-gray mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            Modernit, konvertoivat AI-verkkosivut rakennusalan pk-yrityksille. Kiinteä{' '}
-            <span className="text-white font-semibold">499 €</span> — toteutus 1–3 päivässä,
+            Modernit, konvertoivat AI-verkkosivut rakennusalan pk-yrityksille.{' '}
+            <span className="text-white font-semibold">Kysy hintaa</span> — toteutus 1–3 päivässä,
             ilman piilokuluja ja ilman pitkää sitoutumista. Sivusto, joka näyttää kalliilta ja{' '}
             <span className="text-white font-medium">myy puolestasi 24/7.</span>
           </motion.p>
@@ -391,7 +391,6 @@ export function Pilot() {
         <div className="container mx-auto max-w-5xl flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-brand-gray/80">
           <span className="inline-flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-brand-cyan" /> Ei pitkää sitoutumista</span>
           <span className="inline-flex items-center gap-2"><Zap className="w-4 h-4 text-brand-cyan" /> Toimitus 1–3 päivässä</span>
-          <span className="inline-flex items-center gap-2"><Sparkles className="w-4 h-4 text-brand-cyan" /> AI-chatbot mukana</span>
         </div>
       </section>
 
