@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 interface PageMeta {
-  /** Full <title>. A " — ClarityAI" suffix is appended automatically unless it already ends with the brand. */
+  /** Full <title>. A " - ClarityAI" suffix is appended automatically unless it already ends with the brand. */
   title: string;
   /** Meta description (~150–160 chars for ideal SERP display). */
   description?: string;
@@ -24,7 +24,7 @@ function setMetaTag(attr: 'name' | 'property', key: string, content: string) {
  */
 export function usePageMeta({ title, description }: PageMeta) {
   useEffect(() => {
-    const fullTitle = title.includes('ClarityAI') ? title : `${title} — ClarityAI`;
+    const fullTitle = title.includes('ClarityAI') ? title : `${title} - ClarityAI`;
     const previous = document.title;
     document.title = fullTitle;
     setMetaTag('property', 'og:title', fullTitle);

@@ -36,8 +36,8 @@ export function SectionHeading({
     <div className={`flex flex-col ${alignment} max-w-3xl ${className}`}>
       {eyebrow && (
         <Reveal direction="up">
-          <span className="inline-flex items-center gap-2 px-3 py-1 mb-5 rounded-full glass border border-brand-cyan/20 text-brand-cyan text-xs font-mono uppercase tracking-[0.2em]">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
+          <span className="mb-4 inline-flex items-center gap-2.5 text-[0.7rem] font-mono uppercase tracking-[0.28em] text-brand-cyan">
+            <span aria-hidden className="h-px w-6 bg-brand-cyan/40" />
             {eyebrow}
           </span>
         </Reveal>

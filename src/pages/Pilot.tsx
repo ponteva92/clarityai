@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Clock, Server, PenTool, ArrowRight, MessageSquare, ChevronDown, Search, ArrowLeft, GripVertical, ShieldCheck, Zap } from 'lucide-react';
+import { CheckCircle2, Clock, PenTool, ArrowRight, MessageSquare, ArrowLeft, GripVertical, ShieldCheck, Zap, Gauge, Info } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -14,13 +14,24 @@ import { SectionHeading } from '../components/ui/SectionHeading';
 import { GlowGrid, GlowCard } from '../components/ui/GlowCard';
 import { Parallax } from '../components/ui/Parallax';
 import { TiltCard } from '../components/ui/TiltCard';
+import { FaqAccordion } from '../components/ui/Accordion';
+import { Tooltip } from '../components/ui/Tooltip';
 import { usePageMeta } from '../hooks/usePageMeta';
+import { submitLead } from '../lib/forms';
 
 // --- Types & Schemas ---
 const formSchema = z.object({
   name: z.string().min(2, 'Nimi on liian lyhyt'),
   company: z.string().min(2, 'Yrityksen nimi on liian lyhyt'),
-  phone: z.string().regex(/^(\+358|0)[45]\d{7,8}$/, 'Tarkista puhelinnumero (esim. 040 123 4567)'),
+  // Normalise common formatting (spaces, dashes, parentheses, NBSP) before
+  // validating, then accept any Finnish mobile or landline number. The old
+  // strict pattern rejected the exact spaced format shown in the example.
+  phone: z
+    .string()
+    .refine(
+      (v) => /^(\+358|0)\d{6,11}$/.test(v.replace(/[\s\-()./]/g, '')),
+      'Tarkista puhelinnumero (esim. 040 1234567)'
+    ),
   email: z.string().email('Tarkista sähköpostiosoite'),
   honeypot: z.string().optional(),
 });
@@ -103,7 +114,7 @@ const BeforeAfterSlider = () => {
 
   return (
     <div
-      className="relative w-full h-[500px] md:h-[400px] rounded-[2rem] overflow-hidden select-none glass-card border border-white/10 cursor-ew-resize shadow-premium group"
+      className="relative w-full h-[500px] md:h-[400px] rounded-2xl overflow-hidden select-none glass-card border border-white/10 cursor-ew-resize shadow-premium group"
       ref={containerRef}
       onMouseDown={(e) => {
         setIsDragging(true);
@@ -120,11 +131,11 @@ const BeforeAfterSlider = () => {
           <div className="text-xl font-display font-bold text-brand-gray uppercase tracking-[0.2em]">Ennen</div>
           <ul className="space-y-4">
             {[
-              'Vanhentuneet, hitaat nettisivut',
-              'Asiakkaat soittavat samoista perusasioista',
-              'Tarjouspyyntöjen manuaalinen käsittely',
-              'Verkkosivut eivät tuota uusia liidejä',
-              'Aikaa kuluu "toimisto-hommiin"'
+              'Vastaamattomat puhelut menevät kilpailijalle',
+              'Liideihin vastataan vasta illalla, jos silloinkaan',
+              'Tarjouspyynnöt unohtuvat sähköpostiin',
+              'Vanha verkkosivu ei tuota yhtään yhteydenottoa',
+              'Aikaa palaa toimistohommiin työn sijaan'
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-brand-gray">
                 <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
@@ -143,14 +154,14 @@ const BeforeAfterSlider = () => {
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <div className="w-full max-w-sm space-y-6">
-          <div className="text-xl font-display font-bold text-brand-cyan uppercase tracking-[0.2em] drop-shadow-[0_0_12px_rgba(0,245,255,0.5)]">Jälkeen</div>
+          <div className="text-xl font-display font-bold text-brand-cyan uppercase tracking-[0.2em] drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]">Jälkeen</div>
           <ul className="space-y-4">
             {[
-              'Modernit, nopeat ja luotettavat sivut',
-              'AI-chatbot vastaa peruskysymyksiin 24/7',
-              'Automaattinen liidien keruu ja karsinta',
-              'Sivusto toimii aktiivisena myyjänäsi',
-              'Vapautunut aika tuottavaan työhön'
+              'Moderni, nopea sivu, joka kerää liidit',
+              'SoittoVahti vastaa jokaiseen vastaamattomaan puheluun',
+              'Hälytys uudesta liidistä heti puhelimeesi',
+              'Kaikki yhteydenotot yhdessä näkymässä',
+              'Vapautunut aika menee itse työhön'
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-white">
                 <CheckCircle2 className="w-5 h-5 text-brand-cyan shrink-0 mt-0.5" />
@@ -163,7 +174,7 @@ const BeforeAfterSlider = () => {
 
       {/* Slider Handle */}
       <div
-        className="absolute top-0 bottom-0 w-px bg-brand-cyan shadow-[0_0_15px_rgba(0,245,255,0.8)] group-hover:shadow-[0_0_25px_rgba(0,245,255,1)] transition-shadow duration-300"
+        className="absolute top-0 bottom-0 w-px bg-brand-cyan shadow-[0_0_15px_rgba(16,185,129,0.8)] group-hover:shadow-[0_0_25px_rgba(16,185,129,1)] transition-shadow duration-300"
         style={{ left: `${sliderPosition}%` }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 bg-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center group-hover:scale-110 transition-all duration-300">
@@ -179,28 +190,20 @@ const BeforeAfterSlider = () => {
 // --- Main Page Component ---
 export function Pilot() {
   usePageMeta({
-    title: 'Pilottiohjelma — moderni AI-verkkosivu rakennusalalle',
-    description: 'Rajattu pilotti: 5 paikkaa moderneille AI-verkkosivuille rakennusalan pk-yrityksille. Toteutus 1–3 päivässä, ei pitkää sitoutumista. Kysy hintaa.',
+    title: 'Pilottiohjelma: liidikone rakennusalalle',
+    description: 'Rajattu pilotti: 5 paikkaa rakennus-, LVI- ja sähköalan yrityksille. Verkkosivu, SoittoVahti ja speed-to-lead -hälytykset. Toteutus 1-3 päivässä, ei pitkää sitoutumista.',
   });
 
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
 
-  // FAQ State
-  const [searchQuery, setSearchQuery] = useState('');
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-
+  // FAQ content (4 items, no search needed)
   const faqs = [
-    { question: 'Miksi näin halvalla?', answer: 'Kyseessä on rajattu pilottihanke, jonka tavoitteena on kerätä referenssejä ja hioa tekoälyavusteinen tuotantomallimme rakennusalalla. Sinä saat täyden hyödyn murto-osalla normaalihinnasta — minä saan vahvan referenssin. Win–win, mutta vain viidelle ensimmäiselle.' },
-    { question: 'Mitä jos en ole tyytyväinen?', answer: 'Pilottiin ei sisälly pitkää sitoutumista. Jos et ole tyytyväinen ensimmäisen kuukauden jälkeen, voit lopettaa palvelun ilman lisäkuluja. Selkeä rajaus, läpinäkyvä hinta ja riskitön kokeilu — juuri niin kuin kuuluukin.' },
-    { question: 'Sopiiko pienelle yritykselle?', answer: 'Kyllä. Tämä on suunniteltu nimenomaan 1–25 hengen rakennus-, LVI- ja sähköalan pk-yrityksille, jotka haluavat modernisoida verkkonäkyvyytensä nopeasti ja kustannustehokkaasti — ilman raskasta IT-projektia.' },
-    { question: 'Tarvitaanko teknistä osaamista?', answer: 'Ei lainkaan. Hoidan kaiken teknisen toteutuksen, tekoälyn integroinnin, hostingin ja ylläpidon puolestasi. Sinä kerrot, mitä yrityksesi tekee — minä rakennan sen ympärille sivuston, joka myy.' }
+    { question: 'Miksi näin halvalla?', answer: 'Kyseessä on rajattu pilotti, jonka tavoitteena on kerätä referenssejä ja hioa tuotantomalli rakennusalalla. Sinä saat täyden hyödyn murto-osalla normaalihinnasta, minä saan vahvan referenssin. Win-win, mutta vain viidelle ensimmäiselle.' },
+    { question: 'Mitä jos en ole tyytyväinen?', answer: 'Pilottiin ei sisälly pitkää sitoutumista. Jos et ole tyytyväinen ensimmäisen kuukauden jälkeen, voit lopettaa palvelun ilman lisäkuluja. Selkeä rajaus, läpinäkyvä hinta ja riskitön kokeilu, juuri niin kuin kuuluukin.' },
+    { question: 'Sopiiko pienelle yritykselle?', answer: 'Kyllä. Tämä on suunniteltu nimenomaan 1-25 hengen rakennus-, LVI- ja sähköalan yrityksille, jotka haluavat lisää vastattuja liidejä nopeasti ja kustannustehokkaasti, ilman raskasta IT-projektia.' },
+    { question: 'Tarvitaanko teknistä osaamista?', answer: 'Ei lainkaan. Hoidan kaiken teknisen toteutuksen, SoittoVahdin käyttöönoton, integraatiot ja ylläpidon. SoittoVahti toimii nykyisellä numerollasi, eikä vaadi uutta laitetta tai sovellusta.' }
   ];
-
-  const filteredFaqs = faqs.filter(faq =>
-    faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   // Form State
   const [step, setStep] = useState(1);
@@ -240,45 +243,33 @@ export function Pilot() {
   const onSubmit = async (data: FormData) => {
     if (data.honeypot) return; // Spam protection
 
-    try {
-      const formspreeId = import.meta.env.VITE_FORMSPREE_ID || 'xjgaddeq'; // User's Formspree ID
+    const result = await submitLead({
+      formType: 'pilotti',
+      nimi: data.name,
+      yritys: data.company,
+      puhelin: data.phone.replace(/[\s\-()./]/g, ''),
+      sahkoposti: data.email,
+      viesti: 'Uusi hakemus pilottiohjelmaan',
+      lahde: 'clarityai.fi - pilottilomake',
+      aikaleima: new Date().toISOString(),
+    });
 
-      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          Nimi: data.name,
-          Yritys: data.company,
-          Puhelin: data.phone,
-          Sähköposti: data.email,
-          Viesti: 'Uusi hakemus Pilotti-ohjelmaan!'
-        })
+    if (result.ok) {
+      setIsSuccess(true);
+      localStorage.removeItem('pilotFormData');
+      toast.success('Hakemus lähetetty. Olen yhteydessä 24 tunnin kuluessa.');
+
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#10b981', '#059669', '#fafafa']
       });
-
-      if (response.ok) {
-        setIsSuccess(true);
-        localStorage.removeItem('pilotFormData');
-        toast.success('Hakemus lähetetty. Olen yhteydessä 24 tunnin kuluessa.');
-
-        confetti({
-          particleCount: 150,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#00f5ff', '#a855f7', '#fafafa']
-        });
-      } else {
-        const errorData = await response.json();
-        if (Object.hasOwn(errorData, 'errors')) {
-          toast.error(errorData.errors.map((e: any) => e.message).join(', '));
-        } else {
-          toast.error('Jotain meni pieleen. Yritä uudelleen.');
-        }
-      }
-    } catch (error) {
-      toast.error('Verkkovirhe. Tarkista internetyhteytesi ja yritä uudelleen.');
+    } else {
+      // Webhook unreachable — never drop the application. Open prefilled email.
+      localStorage.removeItem('pilotFormData');
+      toast('Viimeistele hakemus sähköpostitse, avasin valmiin viestin.', { icon: '✉️' });
+      window.location.href = result.mailtoUrl;
     }
   };
 
@@ -292,7 +283,7 @@ export function Pilot() {
         <div className="absolute inset-0 bg-grid pointer-events-none" />
         {/* Parallax ambient wash */}
         <motion.div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,245,255,0.10)_0%,transparent_60%)] pointer-events-none"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.10)_0%,transparent_60%)] pointer-events-none"
           style={{ y: backgroundY }}
         />
 
@@ -319,8 +310,8 @@ export function Pilot() {
           <Parallax offset={-80}>
             <div className="glass-card shadow-pop rounded-2xl px-5 py-4 animate-float-slow" style={{ animationDelay: '-3s' }}>
               <div className="flex items-center gap-2 text-brand-cyan text-sm font-mono">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Toimitus 1–3 päivässä
+                <Zap className="w-4 h-4" />
+                Toimitus 1-3 päivässä
               </div>
               <div className="text-xs text-brand-gray mt-1">aloituspalaverista julkaisuun</div>
             </div>
@@ -339,9 +330,9 @@ export function Pilot() {
           </motion.div>
 
           <h1 className="text-5xl md:text-7xl lg:text-[5.25rem] font-display font-bold mb-8 leading-[0.95] tracking-[-0.04em]">
-            5 paikkaa moderneille <br className="hidden md:block" />
+            5 pilottipaikkaa <br className="hidden md:block" />
             <TypewriterText
-              text="AI-verkkosivuille"
+              text="liidikoneelle"
               className="text-gradient-animated"
             />
           </h1>
@@ -352,10 +343,11 @@ export function Pilot() {
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             className="text-lg md:text-2xl text-brand-gray mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            Modernit, konvertoivat AI-verkkosivut rakennusalan pk-yrityksille.{' '}
-            <span className="text-white font-semibold">Kysy hintaa</span> — toteutus 1–3 päivässä,
-            ilman piilokuluja ja ilman pitkää sitoutumista. Sivusto, joka näyttää kalliilta ja{' '}
-            <span className="text-white font-medium">myy puolestasi 24/7.</span>
+            Liidikone rakennusalan pk-yrityksille: konvertoiva verkkosivu, SoittoVahti ja
+            speed-to-lead -hälytykset.{' '}
+            <span className="text-white font-semibold">Kysy hintaa</span>, toteutus 1-3 päivässä,
+            ilman piilokuluja ja pitkää sitoutumista.{' '}
+            <span className="text-white font-medium">Yksikään liidi ei jää kylmäksi.</span>
           </motion.p>
 
           <motion.div
@@ -390,7 +382,7 @@ export function Pilot() {
       <section className="relative z-10 px-6 md:px-12 pt-2 pb-10">
         <div className="container mx-auto max-w-5xl flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-brand-gray/80">
           <span className="inline-flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-brand-cyan" /> Ei pitkää sitoutumista</span>
-          <span className="inline-flex items-center gap-2"><Zap className="w-4 h-4 text-brand-cyan" /> Toimitus 1–3 päivässä</span>
+          <span className="inline-flex items-center gap-2"><Zap className="w-4 h-4 text-brand-cyan" /> Toimitus 1-3 päivässä</span>
         </div>
       </section>
 
@@ -401,20 +393,27 @@ export function Pilot() {
             <SectionHeading
               eyebrow="Pilottipaketti"
               title={<>Mitä pilotti <span className="text-gradient">sisältää?</span></>}
-              subtitle="Kaikki mitä tarvitset modernin verkkonäkyvyyden käynnistämiseen — yhdellä kiinteällä hinnalla, ilman piilokuluja tai jälkilaskutusta."
+              subtitle="Kaikki mitä tarvitset, jotta yksikään liidi ei jää kiinni ottamatta. Yhdellä kiinteällä hinnalla, ilman piilokuluja tai jälkilaskutusta."
             />
           </div>
 
           <GlowGrid className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 pb-8 md:pb-0 snap-x snap-mandatory hide-scrollbar">
             {[
-              { title: 'Suunnittelu & toteutus', icon: PenTool, desc: 'Moderni, konvertoiva ja mobiilioptimoitu ulkoasu, joka näyttää brändistäsi premium-luokan — ei mallipohjafiilistä.' },
-              { title: 'AI-chatbot integraatio', icon: MessageSquare, desc: 'Älykäs asiakaspalvelija, joka vastaa kysymyksiin 24/7, karsii liidit ja ohjaa kiinnostuneet suoraan yhteydenottoon.' },
-              { title: 'Hosting & ylläpito (1 kk)', icon: Server, desc: 'Salamannopeat palvelimet, SSL-varmenne ja tekninen ylläpito ensimmäisen kuukauden ajan — täysin hoidettuna.' },
-              { title: 'Nopea toteutus (1–3 pv)', icon: Clock, desc: 'Sivustosi on julkaisuvalmis jopa muutamassa päivässä aloituspalaverista. Ei kuukausien odottelua, ei venyviä projekteja.' }
+              { title: 'Konvertoiva verkkosivu', icon: PenTool, desc: 'Moderni, mobiilioptimoitu sivu, joka on suunniteltu muuttamaan kävijä yhteydenotoksi. Ei mallipohjafiilistä, vaan premium-luokan ensivaikutelma.', hint: 'Suunniteltu, koodattu ja optimoitu juuri sinun palveluillesi, ei valmis teema.' },
+              { title: 'SoittoVahti numeroosi', icon: MessageSquare, desc: 'Vastaamaton puhelu muuttuu tekstiviestiksi sekunneissa, jotta asiakas ei ehdi soittaa kilpailijalle.', hint: 'Toimii nykyisellä numerollasi, ei uutta SIM-korttia eikä erillistä sovellusta.' },
+              { title: 'Speed-to-lead -hälytykset', icon: Gauge, desc: 'Hälytys jokaisesta uudesta liidistä ja kaikki yhteydenotot yhdessä näkymässä, jossa mikään ei jää roikkumaan.', hint: 'Hälytys puhelimeesi heti, kun liidi saapuu, joten ehdit vastata ensimmäisenä.' },
+              { title: 'Hosting & nopea toteutus', icon: Clock, desc: 'Hosting, SSL ja tekninen ylläpito ensimmäisen kuukauden ajan. Koko paketti pystyssä 1-3 päivässä aloituspalaverista.', hint: 'Hosting, SSL-sertifikaatti ja ylläpito ensimmäisen kuukauden ajan kuuluvat hintaan.' }
             ].map((feature, i) => (
               <Reveal key={i} delay={i * 0.08} className="min-w-[280px] md:min-w-0 snap-center">
                 <TiltCard className="h-full" max={10} lift={8}>
-                  <GlowCard className="group h-full p-8 rounded-3xl transition-all duration-500">
+                  <GlowCard className="group border-beam relative h-full p-8 rounded-3xl transition-all duration-500">
+                    <div className="absolute top-5 right-5 z-10 tilt-layer">
+                      <Tooltip content={feature.hint}>
+                        <span className="grid place-items-center w-7 h-7 rounded-full border border-white/10 text-brand-gray/70 hover:text-brand-cyan hover:border-brand-cyan/40 transition-colors">
+                          <Info className="w-3.5 h-3.5" />
+                        </span>
+                      </Tooltip>
+                    </div>
                     <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-brand-cyan/40 group-hover:bg-brand-cyan/10 transition-all duration-300 tilt-layer">
                       <feature.icon className="w-7 h-7 text-brand-cyan" />
                     </div>
@@ -454,61 +453,8 @@ export function Pilot() {
           </div>
 
           <Reveal>
-            <div className="relative mb-10">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-gray pointer-events-none" />
-              <input
-                type="text"
-                placeholder="Etsi kysymyksiä..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-black/30 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-brand-gray/50 focus:outline-none focus:border-brand-cyan/50 focus:ring-2 focus:ring-brand-cyan/20 transition-all"
-              />
-            </div>
+            <FaqAccordion items={faqs.map((f) => ({ q: f.question, a: f.answer }))} />
           </Reveal>
-
-          <div className="space-y-4">
-            <AnimatePresence>
-              {filteredFaqs.length > 0 ? filteredFaqs.map((faq, i) => (
-                <motion.div
-                  key={faq.question}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="glass-card gloss border-gradient-hover rounded-2xl overflow-hidden"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between p-6 md:p-7 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan"
-                  >
-                    <span className="text-lg md:text-xl font-semibold text-white pr-8">{faq.question}</span>
-                    <ChevronDown className={`w-6 h-6 text-brand-cyan shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
-                  </button>
-                  <AnimatePresence>
-                    {openFaq === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="px-6 md:px-7 overflow-hidden"
-                      >
-                        <p className="text-brand-gray leading-relaxed text-base md:text-lg pb-6 md:pb-7">{faq.answer}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              )) : (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-center text-brand-gray py-8"
-                >
-                  Ei tuloksia haulla "{searchQuery}"
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
         </div>
       </section>
 
@@ -518,12 +464,12 @@ export function Pilot() {
 
         <div className="container mx-auto max-w-2xl relative z-10">
           <Reveal>
-            <div className="glass-card border border-white/10 p-8 md:p-16 rounded-[3rem] shadow-premium relative overflow-hidden">
+            <div className="glass-card border-beam border border-white/10 p-8 md:p-16 rounded-3xl shadow-premium relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-cyan to-transparent opacity-60" />
 
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-white">Hae mukaan pilottiin</h2>
-                <p className="text-brand-cyan font-medium tracking-wide">Rakennus-, LVI- ja sähköalan pk-yrityksille (1–25 hlö)</p>
+                <p className="text-brand-cyan font-medium tracking-wide">Rakennus-, LVI- ja sähköalan pk-yrityksille (1-25 hlö)</p>
               </div>
 
               {isSuccess ? (
@@ -542,9 +488,9 @@ export function Pilot() {
                 <form className="space-y-8" onSubmit={handleSubmit(onSubmit)} noValidate>
                   {/* Progress Indicator */}
                   <div className="flex items-center justify-center gap-4 mb-8">
-                    <div className={`w-3 h-3 rounded-full transition-colors ${step >= 1 ? 'bg-brand-cyan shadow-[0_0_10px_rgba(0,245,255,0.5)]' : 'bg-white/15'}`} />
+                    <div className={`w-3 h-3 rounded-full transition-colors ${step >= 1 ? 'bg-brand-cyan shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'bg-white/15'}`} />
                     <div className={`w-12 h-0.5 transition-colors ${step >= 2 ? 'bg-brand-cyan' : 'bg-white/15'}`} />
-                    <div className={`w-3 h-3 rounded-full transition-colors ${step >= 2 ? 'bg-brand-cyan shadow-[0_0_10px_rgba(0,245,255,0.5)]' : 'bg-white/15'}`} />
+                    <div className={`w-3 h-3 rounded-full transition-colors ${step >= 2 ? 'bg-brand-cyan shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'bg-white/15'}`} />
                   </div>
 
                   {/* Honeypot */}
@@ -598,10 +544,10 @@ export function Pilot() {
                         <button
                           type="button"
                           onClick={nextStep}
-                          className="w-full py-4 rounded-2xl bg-brand-cyan text-brand-bg font-bold text-lg hover:bg-white hover:shadow-[0_0_30px_rgba(0,245,255,0.5)] transition-all duration-300 mt-8 flex items-center justify-center gap-2"
+                          className="group/btn w-full py-4 rounded-2xl bg-brand-cyan text-brand-bg font-bold text-lg hover:bg-white hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300 mt-8 flex items-center justify-center gap-2 will-change-transform active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg"
                         >
                           Seuraava vaihe
-                          <ArrowRight className="w-5 h-5" />
+                          <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
                         </button>
                       </motion.div>
                     )}
@@ -654,21 +600,21 @@ export function Pilot() {
                           <button
                             type="button"
                             onClick={() => setStep(1)}
-                            className="px-6 py-4 rounded-2xl glass border border-white/10 text-brand-gray font-bold hover:bg-white/10 hover:text-white transition-colors flex items-center justify-center"
+                            className="group/back px-6 py-4 rounded-2xl glass border border-white/10 text-brand-gray font-bold hover:bg-white/10 hover:text-white transition-all duration-300 flex items-center justify-center will-change-transform active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg"
                           >
-                            <ArrowLeft className="w-5 h-5" />
+                            <ArrowLeft className="w-5 h-5 transition-transform duration-300 group-hover/back:-translate-x-1" />
                           </button>
                           <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="flex-1 py-4 rounded-2xl bg-brand-cyan text-brand-bg font-bold text-lg hover:bg-white hover:shadow-[0_0_30px_rgba(0,245,255,0.5)] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="group/submit flex-1 py-4 rounded-2xl bg-brand-cyan text-brand-bg font-bold text-lg hover:bg-white hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2 will-change-transform active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg"
                           >
                             {isSubmitting ? (
                               <span className="w-6 h-6 border-2 border-brand-bg border-t-transparent rounded-full animate-spin" />
                             ) : (
                               <>
                                 Lähetä hakemus
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/submit:translate-x-1" />
                               </>
                             )}
                           </button>

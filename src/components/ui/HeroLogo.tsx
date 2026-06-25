@@ -38,7 +38,7 @@ export function HeroLogo() {
   const rotateY = useSpring(useTransform(px, [0, 1], [-14, 14]), { stiffness: 140, damping: 18, mass: 0.4 });
   const glowX = useTransform(px, [0, 1], ['25%', '75%']);
   const glowY = useTransform(py, [0, 1], ['25%', '75%']);
-  const cursorGlow = useMotionTemplate`radial-gradient(circle at ${glowX} ${glowY}, rgba(0,245,255,0.45), rgba(168,85,247,0.18) 45%, transparent 70%)`;
+  const cursorGlow = useMotionTemplate`radial-gradient(circle at ${glowX} ${glowY}, rgba(16,185,129,0.45), rgba(16,185,129,0.18) 45%, transparent 70%)`;
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (reduce) return;
@@ -82,9 +82,9 @@ export function HeroLogo() {
         >
           <defs>
             <linearGradient id="hl-grad" x1="0" y1="0" x2="240" y2="240" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stopColor="#00f5ff" />
-              <stop offset="0.55" stopColor="#a855f7" />
-              <stop offset="1" stopColor="#f59e0b" />
+              <stop offset="0" stopColor="#34d399" />
+              <stop offset="0.55" stopColor="#10b981" />
+              <stop offset="1" stopColor="#059669" />
             </linearGradient>
           </defs>
 
@@ -93,7 +93,7 @@ export function HeroLogo() {
             <circle cx="120" cy="120" r="116" stroke="url(#hl-grad)" strokeWidth="1" strokeDasharray="2 9" opacity="0.55" />
             {[0, 90, 180, 270].map((d) => {
               const p = polar(116, d);
-              return <circle key={d} cx={p.x} cy={p.y} r="2.4" fill="#00f5ff" />;
+              return <circle key={d} cx={p.x} cy={p.y} r="2.4" fill="#10b981" />;
             })}
           </g>
 
@@ -103,14 +103,14 @@ export function HeroLogo() {
             {Array.from({ length: 36 }).map((_, i) => {
               const a = polar(103, i * 10);
               const b = polar(i % 3 === 0 ? 96 : 99, i * 10);
-              return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#a855f7" strokeWidth="0.8" opacity="0.5" />;
+              return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#059669" strokeWidth="0.8" opacity="0.5" />;
             })}
           </g>
 
           {/* Orbiting satellites */}
           <g className="animate-ring-fast" style={{ transformBox: 'view-box', transformOrigin: '120px 120px' }}>
-            <circle cx={polar(110, 20).x} cy={polar(110, 20).y} r="3" fill="#f59e0b" />
-            <circle cx={polar(110, 200).x} cy={polar(110, 200).y} r="2.4" fill="#00f5ff" />
+            <circle cx={polar(110, 20).x} cy={polar(110, 20).y} r="3" fill="#34d399" />
+            <circle cx={polar(110, 200).x} cy={polar(110, 200).y} r="2.4" fill="#10b981" />
           </g>
         </svg>
 
@@ -121,10 +121,10 @@ export function HeroLogo() {
           style={{
             ...maskStyle,
             backgroundImage:
-              'linear-gradient(120deg, #00f5ff 0%, #7df9ff 28%, #ffffff 50%, #00f5ff 72%, #a855f7 100%)',
+              'linear-gradient(120deg, #10b981 0%, #6ee7b7 28%, #ffffff 50%, #10b981 72%, #059669 100%)',
             backgroundSize: '220% auto',
             animation: reduce ? undefined : 'text-shimmer 7s linear infinite',
-            filter: 'drop-shadow(0 0 16px rgba(0,245,255,0.45))',
+            filter: 'drop-shadow(0 0 16px rgba(16,185,129,0.45))',
             transform: reduce ? undefined : 'translateZ(40px)',
           }}
         />
@@ -139,9 +139,9 @@ export function HeroLogo() {
           <defs>
             <radialGradient id="hl-core" cx="0.5" cy="0.5" r="0.5">
               <stop offset="0" stopColor="#ffffff" />
-              <stop offset="0.35" stopColor="#7df9ff" />
-              <stop offset="0.75" stopColor="#00f5ff" stopOpacity="0.5" />
-              <stop offset="1" stopColor="#00f5ff" stopOpacity="0" />
+              <stop offset="0.35" stopColor="#6ee7b7" />
+              <stop offset="0.75" stopColor="#10b981" stopOpacity="0.5" />
+              <stop offset="1" stopColor="#10b981" stopOpacity="0" />
             </radialGradient>
           </defs>
           <g className="animate-core-pulse">

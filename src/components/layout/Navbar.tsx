@@ -46,7 +46,7 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link to="/" className="relative z-10 flex items-center gap-2.5 group" aria-label="ClarityAI — etusivu">
+        <Link to="/" className="relative z-10 flex items-center gap-2.5 group" aria-label="ClarityAI - etusivu">
           <BrandMark className="w-9 h-9" />
           <span className="font-display font-bold text-xl tracking-tight">
             Clarity<span className="text-brand-cyan">AI</span>
@@ -79,9 +79,9 @@ export function Navbar() {
             data-cal-namespace="konsultaattio"
             data-cal-link="heikki-niemimaki-09cgi0/konsultaattio"
             data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-            className="ml-4 px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-cyan/15 to-brand-purple/15 hover:from-brand-cyan/25 hover:to-brand-purple/25 border border-brand-cyan/30 hover:shadow-[0_0_24px_rgba(0,245,255,0.25)] transition-all duration-300 text-sm font-medium flex items-center gap-2 group"
+            className="ml-4 px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-cyan/15 to-brand-purple/15 hover:from-brand-cyan/25 hover:to-brand-purple/25 border border-brand-cyan/30 hover:shadow-[0_0_24px_rgba(16,185,129,0.25)] transition-all duration-300 text-sm font-medium flex items-center gap-2 group"
           >
-            Varaa ilmainen konsultaatio
+            Varaa ilmainen kartoitus
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </nav>
@@ -124,7 +124,7 @@ export function Navbar() {
               data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
               className="mt-4 px-6 py-3 w-full rounded-xl bg-gradient-to-r from-brand-cyan/20 to-brand-purple/20 border border-brand-cyan/30 text-center font-medium text-white flex items-center justify-center gap-2"
             >
-              Varaa ilmainen konsultaatio
+              Varaa ilmainen kartoitus
               <ChevronRight className="w-4 h-4" />
             </button>
           </motion.div>

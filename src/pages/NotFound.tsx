@@ -43,7 +43,7 @@ export function NotFound() {
           transition={{ delay: 0.2 }}
           className="text-brand-gray text-lg mb-10 max-w-md mx-auto"
         >
-          Etsimääsi sivua ei ole olemassa tai se on siirretty. Tekoälymme ei löytänyt tätä reittiä.
+          Etsimääsi sivua ei ole olemassa tai se on siirretty. Palataan takaisin reitille.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,10 +52,10 @@ export function NotFound() {
         >
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-cyan/40 hover:shadow-[0_0_24px_rgba(0,245,255,0.2)] transition-all duration-300 font-medium text-white group"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-cyan/40 hover:shadow-[0_0_24px_rgba(16,185,129,0.2)] transition-all duration-300 font-medium text-white group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            Palaa Etusivulle
+            Palaa etusivulle
           </Link>
         </motion.div>
       </div>

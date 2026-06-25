@@ -42,7 +42,7 @@ function LegalShell({ eyebrow, title, intro, updated, metaTitle, metaDescription
 
         {/* Content */}
         <Reveal delay={0.05}>
-          <article className="glass-card gloss rounded-[2rem] border border-white/10 p-8 md:p-12 shadow-premium space-y-10">
+          <article className="glass-card gloss rounded-2xl border border-white/10 p-8 md:p-12 shadow-premium space-y-10">
             {children}
           </article>
         </Reveal>
@@ -69,16 +69,16 @@ function LegalShell({ eyebrow, title, intro, updated, metaTitle, metaDescription
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-12 text-center glass-card rounded-[2rem] border border-brand-cyan/20 p-10 relative overflow-hidden">
+          <div className="mt-12 text-center glass-card rounded-2xl border border-brand-cyan/20 p-10 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/10 to-brand-purple/10 pointer-events-none" />
             <div className="relative z-10">
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Kysyttävää tietosuojasta tai ehdoista?</h2>
               <p className="text-brand-gray mb-8 max-w-xl mx-auto">
-                Vastaan jokaiseen tiedusteluun henkilökohtaisesti 24 tunnin sisällä. Läpinäkyvyys ei ole markkinointilause — se on toimintatapani.
+                Vastaan jokaiseen tiedusteluun henkilökohtaisesti 24 tunnin sisällä. Läpinäkyvyys ei ole markkinointilause, se on toimintatapani.
               </p>
               <Link
                 to="/yhteystiedot"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-brand-cyan text-brand-bg font-bold hover:bg-white hover:shadow-[0_0_30px_rgba(0,245,255,0.5)] hover:scale-[1.03] active:scale-95 transition-all duration-300"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-brand-cyan text-brand-bg font-bold hover:bg-white hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] hover:scale-[1.03] active:scale-95 transition-all duration-300"
               >
                 Ota yhteyttä
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -117,7 +117,7 @@ function List({ items }: { items: ReactNode[] }) {
 
 const REKISTERINPITAJA = (
   <span className="text-white/90">
-    ClarityAI / Heikki Niemimäki — Oulu, Suomi · <a href="mailto:clarity.ai@outlook.com" className="text-brand-cyan link-underline">clarity.ai@outlook.com</a>
+    ClarityAI / Heikki Niemimäki, Oulu, Suomi · <a href="mailto:clarity.ai@outlook.com" className="text-brand-cyan link-underline">clarity.ai@outlook.com</a>
   </span>
 );
 
@@ -166,9 +166,9 @@ export function Privacy() {
         <p>Käytän luotettavia, GDPR-yhteensopivia työkaluja tietojen käsittelyyn:</p>
         <List
           items={[
-            <><span className="text-white/90">Formspree & FormSubmit</span> — yhteydenottolomakkeiden välitys sähköpostiini.</>,
-            <><span className="text-white/90">Cal.com</span> — ajanvaraukset ja kalenterihallinta.</>,
-            <><span className="text-white/90">Sähköposti­palveluntarjoaja (Microsoft Outlook)</span> — viestintä.</>,
+            <><span className="text-white/90">Make.com & Formspree</span>: yhteydenotto- ja pilottilomakkeiden välitys ja automaatio.</>,
+            <><span className="text-white/90">Cal.com</span>: ajanvaraukset ja kalenterihallinta.</>,
+            <><span className="text-white/90">Sähköposti­palveluntarjoaja (Microsoft Outlook)</span>: viestintä.</>,
           ]}
         />
         <p>Jokainen palveluntarjoaja käsittelee tietoja oman tietosuojaselosteensa ja kanssani solmitun käsittelysopimuksen mukaisesti.</p>
@@ -209,7 +209,7 @@ export function Terms() {
       metaDescription="ClarityAI:n käyttöehdot: palvelun kuvaus, pilottiohjelman ehdot, immateriaalioikeudet, vastuunrajoitus ja sovellettava laki."
     >
       <Section id="palvelu" title="1. Palvelun kuvaus">
-        <p>ClarityAI tarjoaa tekoälyautomaatioita, älykkäitä chatbotteja, verkkokehitystä sekä konsultointia ja koulutusta ensisijaisesti suomalaisille pk-yrityksille. Palveluiden tarkka sisältö, aikataulu ja hinta sovitaan aina erikseen tarjouksessa tai sopimuksessa.</p>
+        <p>ClarityAI tarjoaa verkkosivujen toteutusta, chatbotteja sekä liidiautomaatioita (kuten vastaamattomien puheluiden tekstiviestiautomaatio, speed-to-lead -hälytykset ja liidien herätys) ensisijaisesti rakennus-, LVI- ja sähköalan pk-yrityksille. Palveluiden tarkka sisältö, aikataulu ja hinta sovitaan aina erikseen tarjouksessa tai sopimuksessa.</p>
       </Section>
 
       <Section id="vastuut" title="2. Vastuut ja palvelun käyttö">
@@ -260,8 +260,8 @@ export function Cookies() {
       <Section id="kaytetyt" title="2. Käyttämäni evästeet">
         <List
           items={[
-            <><span className="text-white/90">Välttämättömät evästeet</span> — varmistavat sivuston perustoiminnan ja tietoturvan. Näitä ei voi kytkeä pois käytöstä.</>,
-            <><span className="text-white/90">Toiminnalliset evästeet</span> — esimerkiksi ajanvarauksen (Cal.com) ja lomakkeiden toiminta sekä keskeneräisen hakemuksen tallennus selaimesi muistiin.</>,
+            <><span className="text-white/90">Välttämättömät evästeet</span>: varmistavat sivuston perustoiminnan ja tietoturvan. Näitä ei voi kytkeä pois käytöstä.</>,
+            <><span className="text-white/90">Toiminnalliset evästeet</span>: esimerkiksi ajanvarauksen (Cal.com) ja lomakkeiden toiminta sekä keskeneräisen hakemuksen tallennus selaimesi muistiin.</>,
           ]}
         />
         <p>En käytä mainos- tai seurantaevästeitä enkä profiloi kävijöitä markkinointitarkoituksiin.</p>

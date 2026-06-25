@@ -26,8 +26,8 @@ export function BrandMark({ className = 'w-9 h-9' }: { className?: string }) {
         className="absolute inset-0 transition-transform duration-300 ease-out group-hover:scale-110"
         style={{
           ...mask,
-          backgroundImage: 'linear-gradient(135deg, #00f5ff 0%, #7df9ff 42%, #ffffff 56%, #a855f7 100%)',
-          filter: 'drop-shadow(0 0 5px rgba(0,245,255,0.45))',
+          backgroundImage: 'linear-gradient(135deg, #10b981 0%, #6ee7b7 42%, #ffffff 56%, #059669 100%)',
+          filter: 'drop-shadow(0 0 5px rgba(16,185,129,0.45))',
         }}
       />
     </span>

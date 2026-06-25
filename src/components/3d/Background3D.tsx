@@ -118,7 +118,7 @@ function NetworkNodes() {
         <pointsMaterial
           ref={pointsMaterialRef}
           transparent
-          color="#00f5ff"
+          color="#10b981"
           size={0.03}
           sizeAttenuation={true}
           depthWrite={false}
@@ -142,7 +142,7 @@ function NetworkNodes() {
         </bufferGeometry>
         <lineBasicMaterial
           ref={linesMaterialRef}
-          color="#a855f7"
+          color="#059669"
           transparent
           opacity={0.15}
           depthWrite={false}
@@ -157,7 +157,7 @@ export function Background3D() {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none opacity-60 mix-blend-screen">
       <Canvas camera={{ position: [0, 0, 3], fov: 60 }}>
-        <fog attach="fog" args={['#0a0b0d', 2, 5]} />
+        <fog attach="fog" args={['#0a0b0b', 2, 5]} />
         <NetworkNodes />
       </Canvas>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-bg/80 to-brand-bg pointer-events-none" />

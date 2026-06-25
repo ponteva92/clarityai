@@ -11,14 +11,14 @@ export function Footer() {
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <Link to="/" className="flex items-center gap-2.5 group" aria-label="ClarityAI — etusivu">
+            <Link to="/" className="flex items-center gap-2.5 group" aria-label="ClarityAI - etusivu">
               <BrandMark className="w-9 h-9" />
               <span className="font-display font-bold text-xl tracking-tight text-white">
                 Clarity<span className="text-brand-cyan">AI</span>
               </span>
             </Link>
             <p className="text-brand-gray text-sm leading-relaxed max-w-xs">
-              Tekoälyautomaatiot, älykkäät chatbotit ja konvertoivat verkkosivut suomalaisille pk-yrityksille. Vähemmän rutiinia, enemmän tulosta.
+              Verkkosivut ja liidiautomaatiot rakennus-, LVI- ja sähköalan pk-yrityksille. Yksikään liidi ei jää kylmäksi.
             </p>
             <div className="flex items-center gap-4">
               <a href="https://www.linkedin.com/in/heikki-niemimäki" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-brand-purple hover:bg-white/10 transition-all duration-300">
@@ -31,19 +31,19 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-6">Palvelut</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">AI-Strategia & Konsultointi</Link>
+                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">Verkkosivut</Link>
               </li>
               <li>
-                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">Älykkäät Chatbotit</Link>
+                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">SoittoVahti</Link>
               </li>
               <li>
-                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">Tekoälykoulutukset</Link>
+                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">Chatbot</Link>
               </li>
               <li>
-                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">Älykäs Prosessiautomaatio</Link>
+                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">Speed-to-lead ja liidien hallinta</Link>
               </li>
               <li>
-                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">AI-Sovellus- & Verkkokehitys</Link>
+                <Link to="/palvelut" className="text-brand-gray hover:text-brand-cyan link-underline transition-colors text-sm">Liidien herätys</Link>
               </li>
             </ul>
           </div>
@@ -83,7 +83,7 @@ export function Footer() {
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               aria-label="Takaisin ylös"
-              className="group ml-2 w-9 h-9 rounded-full glass border border-white/10 flex items-center justify-center text-brand-gray hover:text-brand-cyan hover:border-brand-cyan/40 hover:shadow-[0_0_18px_rgba(0,245,255,0.25)] transition-all duration-300"
+              className="group ml-2 w-9 h-9 rounded-full glass border border-white/10 flex items-center justify-center text-brand-gray hover:text-brand-cyan hover:border-brand-cyan/40 hover:shadow-[0_0_18px_rgba(16,185,129,0.25)] transition-all duration-300"
             >
               <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
             </button>

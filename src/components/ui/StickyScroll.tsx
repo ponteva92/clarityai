@@ -20,7 +20,7 @@ function StepBadge({ icon, index, active }: { icon?: ReactNode; index: number; a
     <div
       className={`relative z-10 mt-0.5 w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border transition-all duration-500 ${
         active
-          ? 'bg-brand-cyan/15 border-brand-cyan text-brand-cyan shadow-[0_0_28px_rgba(0,245,255,0.4)] scale-110'
+          ? 'bg-brand-cyan/15 border-brand-cyan text-brand-cyan shadow-[0_0_28px_rgba(16,185,129,0.4)] scale-110'
           : 'bg-white/5 border-white/10 text-brand-gray'
       }`}
     >
@@ -60,7 +60,7 @@ function PinnedSticky({ items, stepHeight }: { items: StickyItem[]; stepHeight: 
               <div className="absolute left-[22px] top-4 bottom-4 w-px bg-white/10">
                 <motion.div
                   style={{ scaleY: railScale }}
-                  className="absolute inset-0 origin-top bg-gradient-to-b from-brand-cyan via-brand-purple to-brand-amber shadow-[0_0_12px_rgba(0,245,255,0.5)]"
+                  className="absolute inset-0 origin-top bg-gradient-to-b from-brand-cyan via-brand-purple to-brand-amber shadow-[0_0_12px_rgba(16,185,129,0.5)]"
                 />
               </div>
 
@@ -84,7 +84,7 @@ function PinnedSticky({ items, stepHeight }: { items: StickyItem[]; stepHeight: 
                         <motion.span
                           layoutId="sticky-active"
                           aria-hidden
-                          className="absolute inset-0 rounded-2xl glass-card border border-brand-cyan/25 shadow-[0_8px_40px_-12px_rgba(0,245,255,0.35)]"
+                          className="absolute inset-0 rounded-2xl glass-card border border-brand-cyan/25 shadow-[0_8px_40px_-12px_rgba(16,185,129,0.35)]"
                           transition={{ type: 'spring', stiffness: 320, damping: 32 }}
                         />
                       )}

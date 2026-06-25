@@ -1,7 +1,7 @@
 {
-  "name": "ClarityAI — AI Made Clear",
+  "name": "ClarityAI - AI Made Clear",
   "short_name": "ClarityAI",
-  "description": "Tekoälyautomaatiot, älykkäät chatbotit ja konvertoivat verkkosivut suomalaisille pk-yrityksille.",
+  "description": "Verkkosivut ja liidiautomaatiot rakennus-, LVI- ja sähköalan pk-yrityksille. Yksikään liidi ei jää kylmäksi.",
   "lang": "fi",
   "start_url": "/",
   "scope": "/",
